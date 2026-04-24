@@ -1,8 +1,11 @@
-/* River Sentry | Crimson Monitor 
-   Technical Theme: Crimson Admin
+/* RIVER SENTRY | CRIMSON ADMIN THEME
+    Project: ILO-SITE-01 Monitoring Dashboard
+    Author: Alto (Fiber/Electronics Technician)
+    Target: Brave (Linux) & Mobile (Responsive)
 */
 
 :root {
+    /* System Colors */
     --bg: #050505;
     --panel: #111111;
     --crimson: #dc143c;
@@ -12,11 +15,14 @@
     --beige: #F5F5DC;
     --dim: #666;
     --border: #222;
+    
+    /* Condition Colors */
     --clr-normal: #2ecc71;
     --clr-warning: #f1c40f;
     --clr-alert: #e67e22;
 }
 
+/* 1. Global Reset & Layout */
 * { 
     box-sizing: border-box; 
     margin: 0; 
@@ -26,7 +32,7 @@
 body {
     background-color: var(--bg);
     color: var(--text);
-    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-family: 'JetBrains Mono', 'Courier New', monospace; /* Technical font */
     display: flex;
     justify-content: center;
     padding: 20px;
@@ -38,7 +44,7 @@ body {
     max-width: 900px; 
 }
 
-/* Header Section */
+/* 2. Header Section (Sentry Label) */
 .main-header {
     text-align: center;
     margin-bottom: 20px;
@@ -63,7 +69,7 @@ body {
     display: block;
 }
 
-/* Main Monitoring Card */
+/* 3. Monitoring Engine (The Main Card) */
 .sentry-card {
     background: var(--panel);
     border: 1px solid var(--border);
@@ -72,6 +78,7 @@ body {
     box-shadow: 0 15px 35px rgba(0,0,0,0.8);
 }
 
+/* Video Layering Logic */
 .live-indicator-zone {
     position: relative;
     height: 450px;
@@ -86,7 +93,7 @@ body {
     position: absolute;
     top: 50%; left: 50%;
     min-width: 100%; min-height: 100%;
-    z-index: 1;
+    z-index: 1; /* Lowest layer */
     transform: translate(-50%, -50%);
     opacity: 0.4;
     object-fit: cover;
@@ -94,13 +101,13 @@ body {
 
 .indicator-content {
     position: relative;
-    z-index: 10;
+    z-index: 10; /* Above video */
     width: 90%;
     display: flex;
     justify-content: center;
 }
 
-/* Glassmorphism Telemetry Box */
+/* 4. Glassmorphism UI (The Dashboard Box) */
 .telemetry-box {
     background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(15px);
@@ -108,21 +115,21 @@ body {
     border: 1px solid var(--crimson-dark);
     border-radius: 24px;
     padding: 40px;
-    display: none; /* Controlled by JS */
+    display: none; /* Initially hidden; app.js sets to flex */
     flex-direction: column;
     align-items: center;
     width: 100%;
     max-width: 600px;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
 }
 
+/* 5. LIVE STATUS TEXT (The 5rem "Flood" area) */
 .status-display {
-    font-size: 6rem; /* Large size for Desktop */
+    font-size: 5rem; /* Balanced size for "FLOOD" or "NORMAL" */
     font-family: 'Times New Roman', serif;
     font-weight: 900;
     text-transform: uppercase;
     line-height: 1;
-    text-shadow: 0 4px 15px rgba(0,0,0,0.8);
+    text-shadow: 0 4px 15px rgba(0,0,0,0.9);
     text-align: center;
 }
 
@@ -140,18 +147,18 @@ body {
     text-transform: uppercase;
 }
 
-/* Status Colors & Animations */
-.status-flood { color: var(--crimson); animation: criticalBlink 0.5s infinite; font-size: 3rem ;}
-.status-warning { color: var(--clr-warning);font-size: 2.8rem; }
-.status-alert { color: var(--clr-alert); font-size: 3rem;}
-.status-normal { color: var(--clr-normal); font-size: 3rem;}
+/* 6. Dynamic Status Logic (Blinking & Colors) */
+.status-flood { color: var(--crimson); animation: criticalBlink 0.5s infinite; }
+.status-warning { color: var(--clr-warning); }
+.status-alert { color: var(--clr-alert); }
+.status-normal { color: var(--clr-normal); }
 
 @keyframes criticalBlink { 
     0%, 100% { opacity: 1; } 
     50% { opacity: 0.2; } 
 }
 
-/* History Table Section */
+/* 7. Historical Data Table */
 .log-history-zone { padding: 25px; }
 .log-history-zone h3 { 
     font-size: 1.2rem; 
@@ -170,12 +177,12 @@ table { width: 100%; border-collapse: collapse; }
 th { text-align: left; font-size: 0.7rem; color: var(--dim); text-transform: uppercase; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
 td { padding: 12px 0; border-bottom: 1px solid #1a1a1a; font-size: 0.85rem; }
 
-/* UI Indicators */
+/* 8. Loader & Error Handlers */
 .loader { border: 3px solid #222; border-top: 3px solid var(--crimson); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; }
 .error-banner { display: none; background: var(--crimson); color: white; text-align: center; padding: 12px; margin-top: 15px; border-radius: 4px; font-size: 0.8rem; }
 @keyframes spin { 100% { transform: rotate(360deg); } }
 
-/* --- MOBILE RESPONSIVE FIX --- */
+/* 9. MOBILE RESPONSIVE ENGINE (The Actual Phone Fix) */
 @media (max-width: 600px) {
     body { padding: 10px; }
     
@@ -187,7 +194,7 @@ td { padding: 12px 0; border-bottom: 1px solid #1a1a1a; font-size: 0.85rem; }
     }
 
     .status-display {
-        font-size: 3.5rem; /* Scales down for phone screens */
+        font-size: 2.5rem; /* Prevents status text from cutting on mobile */
     }
 
     .main-header h1 { font-size: 1.4rem; }
