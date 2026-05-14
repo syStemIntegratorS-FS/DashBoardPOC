@@ -1,4 +1,4 @@
-Official Dashbaoard of River Sentry 
+Official Dashboard of River Sentry 
 by: ALTO
 
 
